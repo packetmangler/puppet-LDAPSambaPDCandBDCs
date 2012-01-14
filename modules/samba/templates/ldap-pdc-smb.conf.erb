@@ -1,0 +1,44 @@
+[global]
+	workgroup = <%= samba_workgroup %>
+	server string = %h server
+	obey pam restrictions = Yes
+	passdb backend = ldapsam:ldap://127.0.0.1
+	pam password change = Yes
+	passwd program = /usr/bin/passwd %u
+	passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
+	syslog = 0
+	log file = /var/log/samba/log.%m
+	max log size = 1000
+	domain logons = Yes
+	domain master = Yes
+	dns proxy = No
+	ldap admin dn = cn=admin,<%= ldap_basecontext %>
+	ldap group suffix = ou=groups
+	ldap machine suffix = ou=computers
+	ldap suffix = <%= ldap_basecontext %>
+	ldap ssl = no
+	ldap user suffix = ou=users
+	panic action = /usr/share/samba/panic-action %d
+	wins support = Yes
+	add machine script = /usr/sbin/smbldap-useradd -w %u
+        ldap passwd sync = Yes
+
+[homes]
+	comment = Home Directories
+	valid users = %S
+	read only = No
+	create mask = 0700
+	directory mask = 0700
+	browseable = No
+
+[printers]
+	comment = All Printers
+	path = /var/spool/samba
+	create mask = 0700
+	printable = Yes
+	browseable = No
+
+[print$]
+	comment = Printer Drivers
+	path = /var/lib/samba/printers
+

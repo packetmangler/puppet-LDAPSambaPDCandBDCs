@@ -1,0 +1,13 @@
+libnss-ldap	libnss-ldap/rootbindpw	password <%= slapd_password %>
+libnss-ldap	libnss-ldap/bindpw	password	
+libnss-ldap	libnss-ldap/dblogin	boolean	false
+# Automatically update libnss-ldap's configuration file?
+libnss-ldap	libnss-ldap/override	boolean	true
+libnss-ldap	shared/ldapns/base-dn	string	<%= ldap_basecontext %>
+libnss-ldap	libnss-ldap/rootbinddn	string	cn=admin,<%= ldap_basecontext %>
+libnss-ldap	shared/ldapns/ldap_version	select	3
+libnss-ldap	libnss-ldap/binddn	string	cn=proxyuser,<%= ldap_basecontext %>
+libnss-ldap	shared/ldapns/ldap-server	string	ldapi:///
+libnss-ldap	libnss-ldap/nsswitch	note	
+libnss-ldap	libnss-ldap/confperm	boolean	false
+libnss-ldap	libnss-ldap/dbrootlogin	boolean	true

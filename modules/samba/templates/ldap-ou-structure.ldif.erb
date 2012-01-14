@@ -1,0 +1,7 @@
+<% orgunits.each do |ou| -%>
+dn: ou=<%= ou %>,<%= ldap_basecontext %>
+objectclass: top
+objectclass: organizationalUnit
+ou: <%= ou %>
+
+<% end -%>
